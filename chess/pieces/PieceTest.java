@@ -19,8 +19,8 @@ public class PieceTest extends TestCase {
 		verifyCreation(Piece.createWhiteRook(), Piece.createBlackRook(), Piece.Type.ROOK, Piece.ROOK_REPRESENTATION);
 		verifyCreation(Piece.createWhiteKnight(), Piece.createBlackKnight(), Piece.Type.KNIGHT, Piece.KNIGHT_REPRESENTATION);
 		verifyCreation(Piece.createWhiteBishop(), Piece.createBlackBishop(), Piece.Type.BISHOP, Piece.BISHOP_REPRESENTATION);
-		verifyCreation(Piece.createWhitePawn(), Piece.createBlackKing(), Piece.Type.KING, Piece.KING_REPRESENTATION);
-		verifyCreation(Piece.createWhitePawn(), Piece.createBlackQueen(), Piece.Type.QUEEN, Piece.QUEEN_REPRESENTATION);
+		verifyCreation(Piece.createWhiteKing(), Piece.createBlackKing(), Piece.Type.KING, Piece.KING_REPRESENTATION);
+		verifyCreation(Piece.createWhiteQueen(), Piece.createBlackQueen(), Piece.Type.QUEEN, Piece.QUEEN_REPRESENTATION);
 		Piece blank = Piece.noPiece();
 		assertEquals('.', blank.getRepresentation());
 		assertEquals(Piece.Type.NO_PIECE, blank.getType());
@@ -33,7 +33,7 @@ public class PieceTest extends TestCase {
 		
 		assertTrue(blackPiece.isBlack());
 		assertEquals(type, blackPiece.getType());
-		assertEquals(representation, blackPiece.getRepresentation());
+		assertEquals(Character.toUpperCase(representation), blackPiece.getRepresentation());
 		
 	}	
 }

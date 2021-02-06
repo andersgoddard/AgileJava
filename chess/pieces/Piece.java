@@ -37,8 +37,6 @@ public class Piece {
 		
 		if (color == Color.BLACK)
 			setBlackChar();
-		
-		pieceCount++;
 	}
 	
 	public static int getCount(){
