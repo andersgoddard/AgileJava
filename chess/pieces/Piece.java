@@ -2,33 +2,41 @@ package chess.pieces;
 
 public class Piece {
 	
-	final static String white = "white";
-	final static String black = "black";
+	final static char PAWN_REPRESENTATION = 'p';
+	final static char ROOK_REPRESENTATION = 'r';
+	final static char KNIGHT_REPRESENTATION = 'n';
+	final static char BISHOP_REPRESENTATION = 'b';
+	final static char QUEEN_REPRESENTATION = 'q';
+	final static char KING_REPRESENTATION = 'k';
 	static int pieceCount = 0;
 	
-	private String color;
-	private String name;
-	private char characterRepresentation;
+	private enum Color {BLACK, WHITE};
+	enum Type {PAWN, ROOK, KNIGHT, BISHOP, KING, QUEEN, NO_PIECE};
+	Color color;
+	Type type;
+	private char representation;
 	
-	private Piece(String color, String name){
+	private Piece(Color color, Type type){
+		this.type = type;
 		this.color = color;
-		this.name = name;
 		
-		if (name == "pawn")
-			this.characterRepresentation = 'p';
-		else if (name == "knight")
-			this.characterRepresentation = 'n';
-		else if (name == "rook")
-			this.characterRepresentation = 'r';
-		else if (name == "bishop")
-			this.characterRepresentation = 'b';
-		else if (name == "queen")
-			this.characterRepresentation = 'q';
-		else if (name == "king")
-			this.characterRepresentation = 'k';		
-
-		if (color == "black")
-			setBlackChar();		
+		if (type == Type.PAWN)
+			this.representation = PAWN_REPRESENTATION;
+		else if (type == Type.KNIGHT)
+			this.representation = KNIGHT_REPRESENTATION;
+		else if (type == Type.ROOK)
+			this.representation = ROOK_REPRESENTATION;
+		else if (type == Type.BISHOP)
+			this.representation = BISHOP_REPRESENTATION;
+		else if (type == Type.QUEEN)
+			this.representation = QUEEN_REPRESENTATION;
+		else if (type == Type.KING)
+			this.representation = KING_REPRESENTATION;		
+		else if (type == Type.NO_PIECE)
+			this.representation = '.';
+		
+		if (color == Color.BLACK)
+			setBlackChar();
 		
 		pieceCount++;
 	}
@@ -37,31 +45,79 @@ public class Piece {
 		return pieceCount;
 	}
 	
-	String getColor(){
-		return color;
+	public char getRepresentation(){
+		return representation;
 	}
 	
-	String getName(){
-		return name;
+	public static Piece createWhitePawn(){
+		return new Piece(Color.WHITE, Type.PAWN);
 	}
 	
-	public char getCharacterRepresentation(){
-		return characterRepresentation;
+	public static Piece createBlackPawn(){
+		return new Piece(Color.BLACK, Type.PAWN);
 	}
 	
-	public static Piece createPiece(String color, String name){
-		return new Piece(color, name);
+	public static Piece createWhiteRook(){
+		return new Piece(Color.WHITE, Type.ROOK);
+	}
+
+	public static Piece createBlackRook(){
+		return new Piece(Color.BLACK, Type.ROOK);
+	}
+	
+	public static Piece createWhiteKnight(){
+		return new Piece(Color.WHITE, Type.KNIGHT);
+	}
+
+	public static Piece createBlackKnight(){
+		return new Piece(Color.BLACK, Type.KNIGHT);
+	}
+	
+	public static Piece createWhiteBishop(){
+		return new Piece(Color.WHITE, Type.BISHOP);
+	}
+
+	public static Piece createBlackBishop(){
+		return new Piece(Color.BLACK, Type.BISHOP);
+	}
+
+	public static Piece createWhiteQueen(){
+		return new Piece(Color.WHITE, Type.QUEEN);
+	}
+
+	public static Piece createBlackQueen(){
+		return new Piece(Color.BLACK, Type.QUEEN);
+	}	
+
+	public static Piece createWhiteKing(){
+		return new Piece(Color.WHITE, Type.KING);
+	}
+
+	public static Piece createBlackKing(){
+		return new Piece(Color.BLACK, Type.KING);
+	}
+	
+	public static Piece noPiece(){
+		return new Piece(Color.WHITE, Type.NO_PIECE);
 	}
 	
 	void setBlackChar(){
-		this.characterRepresentation = Character.toUpperCase(this.characterRepresentation);
+		this.representation = Character.toUpperCase(this.representation);
 	}
 	
 	boolean isBlack(){
-		return this.getColor() == "black";
+		return this.getColor() == Color.BLACK;
 	}
 	
 	boolean isWhite(){
-		return this.getColor() == "white";
+		return this.getColor() == Color.WHITE;
 	}
+	
+	Color getColor(){
+		return color;
+	}
+	
+	Type getType(){
+		return type;
+	}	
 }

@@ -5,15 +5,7 @@ import chess.pieces.*;
 import util.StringUtil;
 
 public class Board {
-
-	final static String white = "white";
-	final static String black = "black";	
-	final static String pawn = "pawn";	
-	final static String knight = "knight";	
-	final static String bishop = "bishop";	
-	final static String rook = "rook";	
-	final static String queen = "queen";	
-	final static String king = "king";		
+	
 	private ArrayList<Piece> pieces = new ArrayList<Piece>();
 	private ArrayList<Piece> firstRank = new ArrayList<Piece>();
 	private ArrayList<Piece> secondRank = new ArrayList<Piece>();
@@ -25,28 +17,28 @@ public class Board {
 	private ArrayList<Piece> eighthRank = new ArrayList<Piece>();
 	
 	void initialize(){
-		firstRank.add(Piece.createPiece(white, rook));
-		firstRank.add(Piece.createPiece(white, knight));
-		firstRank.add(Piece.createPiece(white, bishop));
-		firstRank.add(Piece.createPiece(white, queen));
-		firstRank.add(Piece.createPiece(white, king));
-		firstRank.add(Piece.createPiece(white, bishop));
-		firstRank.add(Piece.createPiece(white, knight));
-		firstRank.add(Piece.createPiece(white, rook));
+		firstRank.add(Piece.createWhiteRook());
+		firstRank.add(Piece.createWhiteKnight());
+		firstRank.add(Piece.createWhiteBishop());
+		firstRank.add(Piece.createWhiteQueen());
+		firstRank.add(Piece.createWhiteKing());
+		firstRank.add(Piece.createWhiteBishop());
+		firstRank.add(Piece.createWhiteKnight());
+		firstRank.add(Piece.createWhiteRook());
 
 		for (int i = 0; i < 8; i++){
-			secondRank.add(Piece.createPiece(white, pawn));
-			seventhRank.add(Piece.createPiece(black, pawn));
+			secondRank.add(Piece.createWhitePawn());
+			seventhRank.add(Piece.createBlackPawn());
 		}
 		
-		eighthRank.add(Piece.createPiece(black, rook));
-		eighthRank.add(Piece.createPiece(black, knight));
-		eighthRank.add(Piece.createPiece(black, bishop));
-		eighthRank.add(Piece.createPiece(black, queen));
-		eighthRank.add(Piece.createPiece(black, king));
-		eighthRank.add(Piece.createPiece(black, bishop));
-		eighthRank.add(Piece.createPiece(black, knight));
-		eighthRank.add(Piece.createPiece(black, rook));		
+		eighthRank.add(Piece.createBlackRook());
+		eighthRank.add(Piece.createBlackKnight());
+		eighthRank.add(Piece.createBlackBishop());
+		eighthRank.add(Piece.createBlackQueen());
+		eighthRank.add(Piece.createBlackKing());
+		eighthRank.add(Piece.createBlackBishop());
+		eighthRank.add(Piece.createBlackKnight());
+		eighthRank.add(Piece.createBlackRook());		
 	}
 	
 	int pieceCount(){
@@ -61,7 +53,7 @@ public class Board {
 		StringBuilder buffer = new StringBuilder();
 		
 		for (Piece piece : rank) {
-			buffer.append(piece.getCharacterRepresentation());
+			buffer.append(piece.getRepresentation());
 		}
 		
 		return buffer.toString();
@@ -71,14 +63,13 @@ public class Board {
 		StringBuilder buffer = new StringBuilder();
 		
 		for (int i = 0; i < 8; i++) {
-			buffer.append('.');
+			buffer.append(Piece.noPiece().getRepresentation());
 		}
 		
 		return buffer.toString();		
 	}
 	
 	String print(){
-		
 		String blankRank = StringUtil.appendNewLine(getBlankRank());
 		return StringUtil.appendNewLine(getRank(eighthRank)) + 
 			   StringUtil.appendNewLine(getRank(seventhRank)) + 
