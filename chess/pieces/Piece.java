@@ -37,10 +37,21 @@ public class Piece {
 		
 		if (color == Color.BLACK)
 			setBlackChar();
+		
+		pieceCount++;
+	}
+	
+	private Piece(Type type){
+		this.type = type;
+		this.representation = '.';
 	}
 	
 	public static int getCount(){
 		return pieceCount;
+	}
+	
+	public static void resetCount(){
+		pieceCount = 0;
 	}
 	
 	public char getRepresentation(){
@@ -96,7 +107,7 @@ public class Piece {
 	}
 	
 	public static Piece noPiece(){
-		return new Piece(Color.WHITE, Type.NO_PIECE);
+		return new Piece(Type.NO_PIECE);
 	}
 	
 	void setBlackChar(){
