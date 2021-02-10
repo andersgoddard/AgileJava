@@ -34,6 +34,5 @@ public class PieceTest extends TestCase {
 		assertTrue(blackPiece.isBlack());
 		assertEquals(type, blackPiece.getType());
 		assertEquals(Character.toUpperCase(representation), blackPiece.getRepresentation());
-		
 	}	
 }

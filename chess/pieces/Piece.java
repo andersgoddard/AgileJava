@@ -1,6 +1,8 @@
 package chess.pieces;
 
-public class Piece {
+import java.util.*;
+
+public class Piece implements Comparable<Piece> {
 	
 	final static char PAWN_REPRESENTATION = 'p';
 	final static char ROOK_REPRESENTATION = 'r';
@@ -10,11 +12,13 @@ public class Piece {
 	final static char KING_REPRESENTATION = 'k';
 	static int pieceCount = 0;
 	
-	private enum Color {BLACK, WHITE};
-	enum Type {PAWN, ROOK, KNIGHT, BISHOP, KING, QUEEN, NO_PIECE};
+	public enum Color {BLACK, WHITE};
+	public enum Type {PAWN, ROOK, KNIGHT, BISHOP, KING, QUEEN, NO_PIECE};
 	Color color;
 	Type type;
 	private char representation;
+	private String position;
+	private double strength;
 	
 	private Piece(Color color, Type type){
 		this.type = type;
@@ -41,10 +45,42 @@ public class Piece {
 		pieceCount++;
 	}
 	
+	public void setPosition(String position){
+		this.position = position;
+	}
+	
+	public String getPosition(){
+		return position;
+	}
+	
 	private Piece(Type type){
 		this.type = type;
 		this.representation = '.';
 	}
+	
+	public void setStrength(double strength){
+		this.strength = strength;
+	}
+	
+	public double getStrength(){
+		return this.strength;
+	}
+	
+	public boolean isBlack(){
+		return this.getColor() == Color.BLACK;
+	}
+	
+	public boolean isWhite(){
+		return this.getColor() == Color.WHITE;
+	}
+	
+	public Color getColor(){
+		return color;
+	}
+	
+	public Type getType(){
+		return type;
+	}	
 	
 	public static int getCount(){
 		return pieceCount;
@@ -58,75 +94,92 @@ public class Piece {
 		return representation;
 	}
 	
+	private static Piece createPawn(Color color){
+		return new Piece(color, Type.PAWN);
+	}
+	
 	public static Piece createWhitePawn(){
-		return new Piece(Color.WHITE, Type.PAWN);
+		return createPawn(Color.WHITE);
 	}
 	
 	public static Piece createBlackPawn(){
-		return new Piece(Color.BLACK, Type.PAWN);
+		return createPawn(Color.BLACK);
+	}
+	
+	private static Piece createRook(Color color){
+		return new Piece(color, Type.ROOK);
 	}
 	
 	public static Piece createWhiteRook(){
-		return new Piece(Color.WHITE, Type.ROOK);
+		return createRook(Color.WHITE);
 	}
 
 	public static Piece createBlackRook(){
-		return new Piece(Color.BLACK, Type.ROOK);
+		return createRook(Color.BLACK);
+	}
+	
+	private static Piece createKnight(Color color){
+		return new Piece(color, Type.KNIGHT);
 	}
 	
 	public static Piece createWhiteKnight(){
-		return new Piece(Color.WHITE, Type.KNIGHT);
+		return createKnight(Color.WHITE);
 	}
 
 	public static Piece createBlackKnight(){
-		return new Piece(Color.BLACK, Type.KNIGHT);
+		return createKnight(Color.BLACK);
+	}
+	
+	private static Piece createBishop(Color color){
+		return new Piece(color, Type.BISHOP);
 	}
 	
 	public static Piece createWhiteBishop(){
-		return new Piece(Color.WHITE, Type.BISHOP);
+		return createBishop(Color.WHITE);
 	}
 
 	public static Piece createBlackBishop(){
-		return new Piece(Color.BLACK, Type.BISHOP);
+		return createBishop(Color.BLACK);
+	}
+	
+	private static Piece createQueen(Color color){
+		return new Piece(color, Type.QUEEN);
 	}
 
 	public static Piece createWhiteQueen(){
-		return new Piece(Color.WHITE, Type.QUEEN);
+		return createQueen(Color.WHITE);
 	}
 
 	public static Piece createBlackQueen(){
-		return new Piece(Color.BLACK, Type.QUEEN);
+		return createQueen(Color.BLACK);
 	}	
+	
+	private static Piece createKing(Color color){
+		return new Piece(color, Type.KING);
+	}
 
 	public static Piece createWhiteKing(){
-		return new Piece(Color.WHITE, Type.KING);
+		return createKing(Color.WHITE);
 	}
 
 	public static Piece createBlackKing(){
-		return new Piece(Color.BLACK, Type.KING);
+		return createKing(Color.BLACK);
 	}
 	
 	public static Piece noPiece(){
 		return new Piece(Type.NO_PIECE);
 	}
 	
-	void setBlackChar(){
+	private void setBlackChar(){
 		this.representation = Character.toUpperCase(this.representation);
 	}
 	
-	boolean isBlack(){
-		return this.getColor() == Color.BLACK;
+	public int compareTo(Piece that){
+		
+		Double thatDouble = new Double(that.getStrength());
+		Double thisDouble = new Double(this.getStrength());
+		
+		return thatDouble.compareTo(thisDouble);
 	}
-	
-	boolean isWhite(){
-		return this.getColor() == Color.WHITE;
-	}
-	
-	Color getColor(){
-		return color;
-	}
-	
-	Type getType(){
-		return type;
-	}	
+
 }
